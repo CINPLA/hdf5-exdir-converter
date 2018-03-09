@@ -1,0 +1,39 @@
+package:
+  name: hdf5_exdir_converter
+  version: {{ environ.get("GIT_STRING", "0.0.0_custom")|replace("v", "")|replace("-", "_") }}
+
+source:
+  path: ..
+
+build:
+  noarch: python
+  script: python setup.py install
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+    - setuptools
+    - numpy
+
+test:
+  source_files:
+    - hdf5_exdir_converter
+  requires:
+    - pytest
+    - coverage
+    - codecov
+  imports:
+    - hdf5_exdir_converter
+  commands:
+    - coverage run --source hdf5_exdir_converter -m py.test -s
+    - coverage report
+    - codecov
+
+about:
+  home: https://github.com/CINPLA/hdf5-exdir-converter
+  license: GPLv3
+  license_file: LICENSE
