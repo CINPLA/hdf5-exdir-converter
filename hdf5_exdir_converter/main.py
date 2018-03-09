@@ -3,7 +3,7 @@ import click
 
 @click.command()
 @click.help_option('-h', '--help')
-@click.option("--src",
+@click.option("--source",
               "-s",
               type=click.STRING,
               help="source filename",
