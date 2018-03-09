@@ -18,6 +18,8 @@ requirements:
     - python
     - setuptools
     - numpy
+    - h5py
+    - exdir
 
 test:
   source_files:

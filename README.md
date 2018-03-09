@@ -4,3 +4,5 @@
 [![codecov](https://codecov.io/gh/CINPLA/expipe/branch/dev/graph/badge.svg)](https://codecov.io/gh/CINPLA/hdf5-exdir-converter)
 
 # hdf5-exdir-converter
+
+A simple hdf5-exdir converter.  
