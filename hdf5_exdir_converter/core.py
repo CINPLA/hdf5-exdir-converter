@@ -29,14 +29,24 @@ def convert_group(src, target, module):
 
 def convert(src_path, target_path):
     if src_path.endswith(".exdir"):
+        if not target_path.endswith(".hdf5"):
+            raise NameError("converting to hdf5: target should have extension .hdf5")
+
         src = exdir.File(src_path, 'r')
         target = h5py.File(target_path, 'w')
         module = exdir.core
 
     elif src_path.endswith(".hdf5"):
+        if not target_path.endswith(".exdir"):
+            raise NameError("converting to exdir: target should have extension .exdir")
         src = h5py.File(src_path, 'r')
         target = exdir.File(target_path, 'w')
         module = h5py
+
+    else:
+        raise NameError(
+            "src should have extension .hdf5 or .exdir"
+        )
 
     convert_attributes(src=src, target=target)
     for name, item in src.items():
