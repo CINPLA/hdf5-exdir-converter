@@ -46,7 +46,7 @@ def _generate_data(src):
     dset_time_4 = grp_4.create_dataset("time", data=time)
 
 
-def assert_files(f_ex, f_h5):
+def assert_groups(f_ex, f_h5):
     assert_attributes(f_ex.attrs, f_h5.attrs)
 
     for n, m in zip(f_ex, f_h5):
@@ -58,7 +58,7 @@ def assert_files(f_ex, f_h5):
         assert is_dset == isinstance(f_h5[n], h5py.Dataset)
 
         if is_grp:
-            assert_files(f_ex[n], f_h5[n])
+            assert_groups(f_ex[n], f_h5[n])
 
         elif is_dset:
             assert_datasets(f_ex[n], f_h5[n])
@@ -89,7 +89,7 @@ def test_exdir_to_hdf5(setup_teardown_exdir, setup_teardown_hdf5):
     f_h5 = h5py.File(setup_teardown_hdf5[1], 'r')
     f_ex = exdir.File(setup_teardown_exdir[1], 'r')
 
-    assert_files(f_ex, f_h5)
+    assert_groups(f_ex, f_h5)
 
 
 def test_hdf5_to_exdir(setup_teardown_exdir, setup_teardown_hdf5):
@@ -105,4 +105,4 @@ def test_hdf5_to_exdir(setup_teardown_exdir, setup_teardown_hdf5):
     f_h5 = h5py.File(setup_teardown_hdf5[1], 'r')
     f_ex = exdir.File(setup_teardown_exdir[1], 'r')
 
-    assert_files(f_ex, f_h5)
+    assert_groups(f_ex, f_h5)
