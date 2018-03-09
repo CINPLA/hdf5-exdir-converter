@@ -34,16 +34,6 @@ def _generate_data(src):
 
     # Creating group and subgroup for experiment 3
     grp_3 = f.create_group("experiment_invalid")
-    #
-    # # Looping through and accessing
-    # print("Experiments: ", list(f.keys()))
-    # for experiment in f.keys():
-    #     if "voltage" in f[experiment]:
-    #         print(experiment)
-    #         print(f[experiment]["voltage"])
-    #         print("First voltage:", f[experiment]["voltage"][0])
-    #     else:
-    #         print("No voltage values for: {}".format(experiment))
 
     # Creating and accessing a subgroup
     grp_4 = grp_3.create_group("subgroup")
@@ -60,8 +50,13 @@ def test_exdir_to_hdf5(setup_teardown_exdir, setup_teardown_hdf5):
     hdf5_exdir_converter.convert(src_path=str(setup_teardown_exdir[1]),
                                  target_path=str(setup_teardown_hdf5[1]))
 
+    f_h5 = h5py.File(setup_teardown_hdf5[1], 'r')
+    f_ex = exdir.File(setup_teardown_exdir[1], 'r')
 
-@pytest.mark.to_exdir
+    for n, m in zip(f_ex, f_h5):
+        assert n == m
+
+
 def test_hdf5_to_exdir(setup_teardown_exdir, setup_teardown_hdf5):
     f_h5 = h5py.File(setup_teardown_hdf5[1], 'w')
     assert f_h5
@@ -71,3 +66,9 @@ def test_hdf5_to_exdir(setup_teardown_exdir, setup_teardown_hdf5):
 
     hdf5_exdir_converter.convert(src_path=str(setup_teardown_hdf5[1]),
                                  target_path=str(setup_teardown_exdir[1]))
+
+    f_h5 = h5py.File(setup_teardown_hdf5[1], 'r')
+    f_ex = exdir.File(setup_teardown_exdir[1], 'r')
+
+    for n, m in zip(f_ex, f_h5):
+        assert n == m
