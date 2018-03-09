@@ -8,11 +8,12 @@ def convert_attributes(src, target):
 
 
 def convert_dataset(src, target):
-    convert_attributes(src=src, target=target)
     dset = target.require_dataset(name=src.name.split("/")[-1],
                                   data=src.value,
                                   shape=src.value.shape,
                                   dtype=src.value.dtype)
+
+    convert_attributes(src=src, target=dset)
 
 
 def convert_group(src, target, module):
@@ -50,8 +51,12 @@ def convert(src_path, target_path):
 
     convert_attributes(src=src, target=target)
     for name, item in src.items():
-        grp = target.create_group(name=name)
-        convert_group(src=item, target=grp, module=module)
+        if isinstance(item, module.Group):
+            grp = target.create_group(name=name)
+            convert_group(src=item, target=grp, module=module)
+
+        elif isinstance(item, module.Dataset):
+            convert_dataset(src=item, target=target)
 
     src.close()
     target.close()

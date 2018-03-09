@@ -24,7 +24,7 @@ def setup_teardown_exdir(tmpdir):
 
     yield testpath, testfile, testdir
 
-    remove(testpath)
+    # remove(testpath)
 
 
 @pytest.fixture
@@ -39,4 +39,4 @@ def setup_teardown_hdf5(tmpdir):
 
     yield testpath, testfile, testdir
 
-    remove(testpath)
+    # remove(testpath)
