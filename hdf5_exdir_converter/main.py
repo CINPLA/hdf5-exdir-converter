@@ -1,6 +1,7 @@
 import click
 import os
 import hdf5_exdir_converter
+import warnings
 
 
 @click.command()
@@ -13,7 +14,8 @@ import hdf5_exdir_converter
               required=False)
 def exdir2hdf(filename, target=None):
     # TODO: add option for force convert if target exists
-
+    warnings.warn("IMPORTANT: this is a proof of concept implementation and is not ready for production use. Data might be lost.")
+    
     if not filename.endswith(".exdir"):
         raise NameError("filename should have extension `.exdir`")
 
@@ -39,6 +41,7 @@ def exdir2hdf(filename, target=None):
               required=False)
 def hdf2exdir(filename, target=None):
     # TODO: add option for force convert if target exists
+    warnings.warn("IMPORTANT: this is a proof of concept implementation and is not ready for production use. Data might be lost.")
 
     if not filename.endswith(".hdf5"):
         raise NameError("filename should have extension `.hdf5`")

@@ -5,7 +5,7 @@
 
 *Important*: The reference implementation contained in this repository is intended for
 feedback and as a basis for future library implementations.
-It is not ready for production use.
+It is not ready for production use. Data might be lost.
 
 # hdf5-exdir-converter
 
