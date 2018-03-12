@@ -3,6 +3,9 @@
 [![Anaconda-Server Badge](https://anaconda.org/cinpla/hdf5_exdir_converter/badges/installer/conda.svg)](https://anaconda.org/cinpla/hdf5_exdir_converter)
 [![codecov](https://codecov.io/gh/CINPLA/hdf5-exdir-converter/branch/dev/graph/badge.svg)](https://codecov.io/gh/CINPLA/hdf5-exdir-converter)
 
+*Important*: The reference implementation contained in this repository is intended for
+feedback and as a basis for future library implementations.
+It is not ready for production use.
 
 # hdf5-exdir-converter
 
