@@ -15,10 +15,12 @@ conda install -c cinpla hdf5_exdir_converter
 
 ## Usage
 ```bash
-hdf5_exdir_converter --source "filename.hdf5" --target "filename.exdir"
+hdf2exdir "filename.hdf5" # creates "filename.exdir"
 ```
-or 
+or
 
 ```bash
-hdf5_exdir_converter --source "filename.exdir" --target "filename.hdf5"
+exdir2hdf "filename.exdir" # creates "filename.hdf5"
 ```
+
+The optional argument `--target` can be used to set the target filename.
