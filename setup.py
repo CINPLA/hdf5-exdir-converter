@@ -6,7 +6,8 @@ install_requires = []
 
 entry_points = {
     'console_scripts': [
-        'hdf5_exdir_converter=hdf5_exdir_converter.main:main'
+        'hdf2exdir=hdf5_exdir_converter.main:hdf2exdir',
+        'exdir2hdf=hdf5_exdir_converter.main:exdir2hdf'
     ]}
 
 setup(

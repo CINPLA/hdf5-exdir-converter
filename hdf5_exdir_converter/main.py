@@ -1,26 +1,49 @@
 import click
+import os
+import hdf5_exdir_converter
 
 
 @click.command()
 @click.help_option('-h', '--help')
-@click.option("--source",
-              "-s",
-              type=click.STRING,
-              help="source filename",
-              required=True)
+@click.argument("filename")
 @click.option("--target",
               "-t",
               type=click.STRING,
-              help="target filename",
-              required=True)
-def cli(src, target):
-    import hdf5_exdir_converter
-    hdf5_exdir_converter.convert(src_path=src,
+              help="target filename (optional)",
+              required=False)
+def exdir2hdf(filename, target=None):
+    # TODO: add option for force convert if target exists
+
+    if not filename.endswith(".exdir"):
+        raise NameError("filename should have extension `.exdir`")
+
+    filepath, file_extension = os.path.splitext(filename)
+    target = target or filepath+".hdf5"
+    if os.path.exists(target):
+        raise FileExistsError("target already exists: {}".format(target))
+
+    hdf5_exdir_converter.convert(src_path=filename,
                                  target_path=target)
 
 
-def main():
-    cli()
+@click.command()
+@click.help_option('-h', '--help')
+@click.argument("filename")
+@click.option("--target",
+              "-t",
+              type=click.STRING,
+              help="target filename (optional)",
+              required=False)
+def hdf2exdir(filename, target=None):
+    # TODO: add option for force convert if target exists
 
-if __name__ == "__main__":
-    sys.exit(main())
+    if not filename.endswith(".hdf5"):
+        raise NameError("filename should have extension `.hdf5`")
+
+    filepath, file_extension = os.path.splitext(filename)
+    target = target or filepath+".exdir"
+    if os.path.exists(target):
+        raise FileExistsError("target already exists: {}".format(target))
+
+    hdf5_exdir_converter.convert(src_path=filename,
+                                 target_path=target)
