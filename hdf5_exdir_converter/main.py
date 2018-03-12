@@ -19,6 +19,9 @@ def exdir2hdf(filename, target=None):
 
     filepath, file_extension = os.path.splitext(filename)
     target = target or filepath+".hdf5"
+
+    if not target.endswith(".hdf5"):
+        raise NameError("target filename should have extension `.hdf5`")
     if os.path.exists(target):
         raise FileExistsError("target already exists: {}".format(target))
 
@@ -42,6 +45,9 @@ def hdf2exdir(filename, target=None):
 
     filepath, file_extension = os.path.splitext(filename)
     target = target or filepath+".exdir"
+
+    if not target.endswith(".exdir"):
+        raise NameError("target filename should have extension `.exdir`")
     if os.path.exists(target):
         raise FileExistsError("target already exists: {}".format(target))
 
