@@ -34,14 +34,14 @@ def convert(src_path, target_path):
             raise NameError("converting to hdf5: target should have extension .hdf5")
 
         src = exdir.File(src_path, 'r')
-        target = h5py.File(target_path, 'w')
+        target = h5py.File(target_path)
         module = exdir.core
 
     elif src_path.endswith(".hdf5"):
         if not target_path.endswith(".exdir"):
             raise NameError("converting to exdir: target should have extension .exdir")
         src = h5py.File(src_path, 'r')
-        target = exdir.File(target_path, 'w')
+        target = exdir.File(target_path)
         module = h5py
 
     else:
